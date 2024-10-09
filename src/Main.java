@@ -13,6 +13,7 @@ public class Main {
         int distance_ship_city = 7;
         int ship_location = 0;
         int amount_of_boxes = 3;
+        int amount_of_correct_guesses = 0;
 
         int location_first_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
         int location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
@@ -46,16 +47,15 @@ public class Main {
         }
 
             if (location_first_cargo == locations_of_the_cargos[0]) {
-                System.out.println("You found first cargo, but cargo changed it's location.");
-                location_first_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+                amount_of_correct_guesses++;
             }
             if (location_second_cargo == locations_of_the_cargos[1]) {
-                System.out.println("You found second cargo, but cargo changed it's location.");
-                location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+                amount_of_correct_guesses++;
             }
             if (location_third_cargo == locations_of_the_cargos[2]) {
-                System.out.println("You found third cargo, but cargo changed it's location.");
-                location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+                amount_of_correct_guesses++;
             }
+
+            System.out.println("Amount of correct locations: " + amount_of_correct_guesses);
     }
 }
