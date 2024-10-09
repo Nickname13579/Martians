@@ -57,10 +57,6 @@ public class Main {
                 lost_locations_cargos[i] = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
             }
         }
-
-        System.out.println(lost_locations_cargos[0]);
-        System.out.println(lost_locations_cargos[1]);
-        System.out.println(lost_locations_cargos[2]);
     }
 
     static int return_correct_guesses(int amount_of_boxes, int[] lost_locations_cargos, int[] enter_locations_cargos, int correct_guesses){
