@@ -19,7 +19,7 @@ public class Main {
         int[] lost_locations_cargos = new int[amount_boxes];
         change_locations_cargos(lost_locations_cargos, amount_boxes, distance_ship_city, ship_location);
 
-        while(show_correct_guesses < 3) {
+        while(show_correct_guesses < amount_boxes) {
             System.out.println("Enter Locations of cargos: ");
 
             int[] enter_locations_cargos = new int[amount_boxes];
