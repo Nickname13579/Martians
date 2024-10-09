@@ -14,23 +14,36 @@ public class Main {
         int ship_location = 0;
         int amount_of_boxes = 3;
         int correct_guesses = 0;
+        int show_correct_guesses = 0;
         int amount_of_attempts = 0;
 
         int[] lost_locations_of_cargos = new int[amount_of_boxes];
         change_locations_of_cargos(lost_locations_of_cargos, amount_of_boxes, distance_ship_city, ship_location);
 
+        while(show_correct_guesses < 3) {
+            System.out.println("Enter Locations of cargos: ");
 
-        System.out.println("Enter Locations of cargos: ");
+            int[] enter_locations_of_the_cargos = new int[amount_of_boxes];
 
-        int[] enter_locations_of_the_cargos = new int[amount_of_boxes];
+            for (int i = 0; i < amount_of_boxes; i++) {
+                enter_locations_of_the_cargos[i] = scanner.nextInt();
+                if (enter_locations_of_the_cargos[i] > 7 || enter_locations_of_the_cargos[i] < 0) {
+                    System.out.println("Invalid Input");
+                    System.exit(1);
+                }
+            }
 
-        for(int i = 0; i < amount_of_boxes; i++){
-            enter_locations_of_the_cargos[i] = scanner.nextInt();
+            show_correct_guesses = return_correct_guesses(amount_of_boxes, lost_locations_of_cargos, enter_locations_of_the_cargos, correct_guesses);
+            System.out.println("Amount of correct guesses: " + show_correct_guesses);
+            amount_of_attempts++;
+
+            if(amount_of_attempts == 5){
+                System.out.println("Too many attempts, cargos changed their locations");
+                change_locations_of_cargos(lost_locations_of_cargos, amount_of_boxes, distance_ship_city, ship_location);
+            }
         }
 
-        int show_correct_guesses = return_correct_guesses(amount_of_boxes, lost_locations_of_cargos, enter_locations_of_the_cargos, correct_guesses);
-        System.out.println(show_correct_guesses);
-
+        System.out.println("Congratulations you found all the boxes");
     }
 
     static void change_locations_of_cargos(int[] lost_locations_of_cargos, int amount_of_boxes, int distance_ship_city, int ship_location){
@@ -44,10 +57,6 @@ public class Main {
                 lost_locations_of_cargos[i] = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
             }
         }
-
-        System.out.println(lost_locations_of_cargos[0]);
-        System.out.println(lost_locations_of_cargos[1]);
-        System.out.println(lost_locations_of_cargos[2]);
     }
 
     static int return_correct_guesses(int amount_of_boxes, int[] lost_locations_of_cargos, int[] enter_locations_of_the_cargos, int correct_guesses){
