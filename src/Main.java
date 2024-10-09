@@ -10,7 +10,7 @@ public class Main {
         System.out.println("----------------------------");
 
         int distance_ship_city = 7;
-        int ship_location = 0;
+        int ship_location = 1;
         int amount_boxes = 3;
         int correct_guesses = 0;
         int show_correct_guesses = 0;
@@ -26,7 +26,7 @@ public class Main {
 
             for (int i = 0; i < amount_boxes; i++) {
                 enter_locations_cargos[i] = scanner.nextInt();
-                if (enter_locations_cargos[i] > 7 || enter_locations_cargos[i] < 0) {
+                if (enter_locations_cargos[i] > 7 || enter_locations_cargos[i] < 1) {
                     System.out.println("Invalid Input");
                     System.exit(1);
                 }
@@ -49,14 +49,18 @@ public class Main {
     static void change_locations_cargos(int[] lost_locations_cargos, int amount_boxes, int distance_ship_city, int ship_location){
         Random random = new Random();
         for(int i = 0; i < amount_boxes; i++){
-            lost_locations_cargos[i] = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+            lost_locations_cargos[i] = random.nextInt((distance_ship_city - ship_location + 1)) + ship_location;
         }
 
         for(int i = 1; i < amount_boxes; i++){
             while (lost_locations_cargos[i - 1] == lost_locations_cargos[i]){
-                lost_locations_cargos[i] = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+                lost_locations_cargos[i] = random.nextInt((distance_ship_city - ship_location + 1)) + ship_location;
             }
         }
+
+        System.out.println(lost_locations_cargos[0]);
+        System.out.println(lost_locations_cargos[1]);
+        System.out.println(lost_locations_cargos[2]);
     }
 
     static int return_correct_guesses(int amount_of_boxes, int[] lost_locations_cargos, int[] enter_locations_cargos, int correct_guesses){
@@ -64,7 +68,7 @@ public class Main {
             for(int j = 0; j < amount_of_boxes; j++){
                 if(lost_locations_cargos[i] == enter_locations_cargos[j]){
                     correct_guesses++;
-                    i++;
+                    break;
                 }
             }
         }
