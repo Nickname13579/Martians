@@ -15,8 +15,25 @@ public class Main {
         int amount_of_boxes = 3;
 
         int location_first_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
-        int location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location) % 7;
-        int location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location) % 7;
+        int location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        int location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+
+        while(location_first_cargo == location_second_cargo){
+            location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        }
+
+        while(location_first_cargo == location_third_cargo){
+            location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        }
+
+        while(location_second_cargo == location_third_cargo){
+            location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        }
+
+        System.out.println(location_first_cargo);
+        System.out.println(location_second_cargo);
+
+        System.out.println("Enter Locations of cargos: ");
 
         int[] locations_of_the_cargos = new int[amount_of_boxes];
 
@@ -28,15 +45,17 @@ public class Main {
             }
         }
 
-        for(int i = 0; i < amount_of_boxes; i++){
-            if(location_first_cargo == locations_of_the_cargos[i]){
+            if (location_first_cargo == locations_of_the_cargos[0]) {
+                System.out.println("You found first cargo, but cargo changed it's location.");
                 location_first_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
-            }else if(location_second_cargo == locations_of_the_cargos[i]){
+            }
+            if (location_second_cargo == locations_of_the_cargos[1]) {
+                System.out.println("You found second cargo, but cargo changed it's location.");
                 location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
-            }else if(location_third_cargo == locations_of_the_cargos[i]){
+            }
+            if (location_third_cargo == locations_of_the_cargos[2]) {
+                System.out.println("You found third cargo, but cargo changed it's location.");
                 location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
             }
-        }
-
     }
 }
