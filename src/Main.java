@@ -13,7 +13,7 @@ public class Main {
         int distance_ship_city = 7;
         int ship_location = 0;
         int amount_of_boxes = 3;
-        int amount_of_correct_guesses = 0;
+        int amount_of_attempts = 5;
 
         int location_first_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
         int location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
@@ -38,24 +38,45 @@ public class Main {
 
         int[] locations_of_the_cargos = new int[amount_of_boxes];
 
-        for(int i = 0; i < amount_of_boxes; i++){
-            locations_of_the_cargos[i] = scanner.nextInt();
-            if(locations_of_the_cargos[i] > distance_ship_city || locations_of_the_cargos[i] < ship_location){
-                System.out.println("Invalid Input");
-                System.exit(1);
-            }
-        }
+        for(int i = 0; i < amount_of_attempts; i++) {
 
-            if (location_first_cargo == locations_of_the_cargos[0]) {
+            for(int j = 0; j < amount_of_boxes; j++){
+                locations_of_the_cargos[j] = scanner.nextInt();
+                if(locations_of_the_cargos[j] > distance_ship_city || locations_of_the_cargos[j] < ship_location){
+                    System.out.println("Invalid Input");
+                    System.exit(1);
+                }
+            }
+
+            int amount_of_correct_guesses = 0;
+            if (location_first_cargo == locations_of_the_cargos[0] || location_second_cargo == locations_of_the_cargos[0] || location_third_cargo == locations_of_the_cargos[0]) {
                 amount_of_correct_guesses++;
             }
-            if (location_second_cargo == locations_of_the_cargos[1]) {
+            if (location_first_cargo == locations_of_the_cargos[1] || location_second_cargo == locations_of_the_cargos[1] || location_third_cargo == locations_of_the_cargos[1]) {
                 amount_of_correct_guesses++;
             }
-            if (location_third_cargo == locations_of_the_cargos[2]) {
+            if (location_first_cargo == locations_of_the_cargos[2] || location_second_cargo == locations_of_the_cargos[2] || location_third_cargo == locations_of_the_cargos[2]) {
                 amount_of_correct_guesses++;
             }
 
             System.out.println("Amount of correct locations: " + amount_of_correct_guesses);
+        }
+
+        System.out.println("Cargos suspected you and changed locations");
+        location_first_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+
+        while(location_first_cargo == location_second_cargo){
+            location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        }
+
+        while(location_first_cargo == location_third_cargo){
+            location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        }
+
+        while(location_second_cargo == location_third_cargo){
+            location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        }
     }
 }
