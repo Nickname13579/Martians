@@ -10,13 +10,13 @@ public class Main {
         System.out.println("Helping the Martians");
         System.out.println("----------------------------");
 
-        int location_first_cargo = random.nextInt() % 7;
-        int location_second_cargo = random.nextInt() % 7;
-        int location_third_cargo = random.nextInt() % 7;
-
         int distance_ship_city = 7;
         int ship_location = 0;
         int amount_of_boxes = 3;
+
+        int location_first_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+        int location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location) % 7;
+        int location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location) % 7;
 
         int[] locations_of_the_cargos = new int[amount_of_boxes];
 
@@ -28,6 +28,15 @@ public class Main {
             }
         }
 
+        for(int i = 0; i < amount_of_boxes; i++){
+            if(location_first_cargo == locations_of_the_cargos[i]){
+                location_first_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+            }else if(location_second_cargo == locations_of_the_cargos[i]){
+                location_second_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+            }else if(location_third_cargo == locations_of_the_cargos[i]){
+                location_third_cargo = random.nextInt((distance_ship_city - ship_location + 1) - ship_location);
+            }
+        }
 
     }
 }
